@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.loja_games.Repository.CategoriaRepository;
-import com.generation.loja_games.Repository.ProdutoRepository;
 import com.generation.loja_games.model.Produto;
+import com.generation.loja_games.repository.CategoriaRepository;
+import com.generation.loja_games.repository.ProdutoRepository;
 
 import jakarta.validation.Valid;
 

@@ -1,4 +1,4 @@
-package com.generation.loja_games.Repository;
+package com.generation.loja_games.repository;
 
 import java.math.BigDecimal;
 import java.util.List;

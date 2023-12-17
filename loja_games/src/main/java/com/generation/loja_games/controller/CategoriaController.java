@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.loja_games.Repository.CategoriaRepository;
 import com.generation.loja_games.model.Categoria;
+import com.generation.loja_games.repository.CategoriaRepository;
 
 import jakarta.validation.Valid;
 
@@ -39,7 +39,8 @@ public class CategoriaController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> getById(@PathVariable Long id) {
-		return categoriaRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
+		return categoriaRepository.findById(id)
+				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 	}
 

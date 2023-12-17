@@ -30,7 +30,6 @@ public class Produto {
 	private String produto;
 	
 	@Column(length = 100)
-	@NotBlank(message = "O nome do produto é obrigatório")
 	@DecimalMin(value = "0.0", inclusive = false, message = "O preço deve ser maior que zero")
 	@Digits(integer = 5, fraction = 2)
 	private BigDecimal preco;

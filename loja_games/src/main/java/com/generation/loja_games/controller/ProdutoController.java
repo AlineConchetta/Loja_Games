@@ -21,7 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.loja_games.Repository.CategoriaRepository;
 import com.generation.loja_games.Repository.ProdutoRepository;
-import com.generation.loja_games.model.Categoria;
 import com.generation.loja_games.model.Produto;
 
 import jakarta.validation.Valid;
@@ -49,9 +48,9 @@ public class ProdutoController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
-	@GetMapping("/descricao/{descricao}")
-	ResponseEntity<List<Categoria>> getByCategoria(@PathVariable String descricao) {
-		return ResponseEntity.ok(categoriaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
+	@GetMapping("/nome/{nome}")
+	ResponseEntity<List<Produto>> getByProduto(@PathVariable String nome) {
+		return ResponseEntity.ok(produtoRepository.findAllByProdutoContainingIgnoreCase(nome));
 	}
 
 	@PostMapping
@@ -65,15 +64,24 @@ public class ProdutoController {
 	@PutMapping
 	public ResponseEntity<Produto> put(@Valid @RequestBody Produto produto) {
 		if(produtoRepository.existsById(produto.getId())) {
-			if(categoriaRepository.existsById(produto.getId())) {
+			if(produtoRepository.existsById(produto.getId())) {
 				return ResponseEntity.status(HttpStatus.OK)
 						.body(produtoRepository.save(produto));
 			}
 			
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categorianão existe.", null);
 	}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();}
+	
+	/*/
+
+	
+	public ResponseEntity<Produto> put(@Valid @RequestBody Produto produto) {
+		return produtoRepository.findById(produto.getId())
+				.map(checagem -> ResponseEntity.status(HttpStatus.OK)
+						.body(produtoRepository.save(produto)))
+				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	} /*/
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
